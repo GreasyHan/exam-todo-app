@@ -1,7 +1,7 @@
 <template>
     <div class="form">
         <h3>Register</h3>
-        <form action="#" @submit.prevent="handleLogin">
+        <form action="#" @submit.prevent="attemptRegister">
             <div class="form-row">
                 <input type="text" class="form-control" v-model="formData.name" placeholder="Username" />
             </div>
@@ -12,7 +12,7 @@
                 <input type="password" class="form-control" v-model="formData.password" placeholder="Password" />
             </div>
             <div class="form-row">
-                <input type="password" class="form-control" v-model="formData.confirmPassword" placeholder="Confirm Password" />
+                <input type="password" class="form-control" v-model="formData.password_confirmation" placeholder="Confirm Password" />
             </div>
             <div class="form-row">
                 <button type="submit" class="btn btn-primary">Login</button>
@@ -29,7 +29,7 @@
                     name: "",
                     email: "",
                     password: "",
-                    confirmPassword: ""
+                    password_confirmation: ""
                 }
             }
         },
