@@ -22,36 +22,34 @@ class Todo extends Model
     ];
 
     public function todoCreate($data) {
-        $date = new Carbon($data['done_at']);
+        $todo = new Todo;
+        $todo->note = $data['todo']['note'];
+        $todo->save();
 
-        $result = Todo::create([
-            'note' => $data['note'],
-            'done' => $data['done'],
-            'done_at' => $date,
-        ]);
-
-        return $result;
+        return $todo;
     }
 
     public function todoUpdate($data, $id) {
-        $date = new Carbon($data['done_at']);
+        $todo = Todo::find($id);
 
-        $todo = Todo::where('id', $id);
-        $todo->note = $data['note'];
-        $todo->done = $data['done'];
-        $todo->done_at = $date;
-        $todo->save();
-        $todo->refresh();
+        if ($todo) {
+            $todo->done = $data['todo']['done'];
+            $todo->done_at = $data['todo']['done'] ? Carbon::now() : null;
+            return $todo->save();
+        }
 
-        return $todo;
+        return 'no such item was found!';
     }
 
-    public function todoDelete($data, $id) {
-        $date = new Carbon($data['done_at']);
-        
-        $todo = Todo::where('id', $id);
-        $todo->delete();
+    public function todoDelete($id) {
+        $todo = Todo::find($id);
+        $result = 'no such item was found!';
 
-        return $todo;
+        if ($todo) {
+            $todo->delete();
+            $result = 'successfully deleted!';
+        }
+
+        return $result;
     }
 }

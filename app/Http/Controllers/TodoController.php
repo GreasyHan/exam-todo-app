@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Todo;
+use Carbon\Carbon;
 
 class TodoController extends Controller
 {
@@ -24,9 +25,8 @@ class TodoController extends Controller
         return Todo::todoUpdate($data, $id);
     }
     
-    public function delete(Request $request, int $id)
+    public function delete(int $id)
     {
-        $data = $request->all();
-        return Todo::todoDelete($data, $id);
+        return Todo::todoDelete($id);
     }
 }
