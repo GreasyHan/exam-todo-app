@@ -1,7 +1,7 @@
 <template>
     <div class="form">
         <h3>Register</h3>
-        <form action="#" @submit.prevent="attemptRegister">
+        <form action="#" @submit.prevent="attemptedRegister">
             <div class="form-row">
                 <input type="text" class="form-control" v-model="formData.name" placeholder="Username" />
             </div>
@@ -34,7 +34,7 @@
             }
         },
         methods: {
-            attemptRegister() {
+            attemptedRegister() {
                 axios.get('/sanctum/csrf-cookie').then(res => {
                     axios.post('/register', this.formData).then(res => {
                         this.$emit("loggedIn");
